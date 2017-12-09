@@ -1,0 +1,31 @@
+bool pressed = false;
+bool send0 = true;
+bool send1 = true;
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(8,INPUT_PULLUP);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if(digitalRead(8) == HIGH)
+    pressed = false;
+  else
+    pressed = true;
+    
+  if(pressed){
+    if(send1){
+      Serial.print(1);
+      send1 = false;
+    }
+    send0 = true;
+  }
+  else{
+    if(send0){
+      Serial.print(0);
+      send0 = false;
+    }
+    send1 = true;
+  }
+}
